@@ -19,6 +19,7 @@ public class GameBoard {
             //this for-each loop goes through every position in the row
             for (char position : row) {
                 System.out.print(position);
+                System.out.print(' ');
             }
             System.out.println();
 
@@ -174,6 +175,16 @@ public class GameBoard {
             return false;
         }else{
             return true;
+
+        }
+
+    }
+    public void resetBoard(){
+        for(int i = 0; i < board.length; i += 2 ){
+            char[] row = board[i];
+            for(int k = 0 ; k < row.length; k += 2){
+               row[k] = ' ';
+            }
 
         }
     }

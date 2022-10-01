@@ -3,51 +3,57 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner gameScan = new Scanner(System.in);
+        GameBoard gameBoard = new GameBoard();
 
-             GameBoard playGround = new GameBoard();
-             Player p1 = new Player("Liza", 'o');
-             Player p2 = new Player("Anders", 'x');
+        System.out.println("Welcome to this funny little game called Tictactoe!!");
 
-
-
-
+        Player p1 = new Player(gameScan,'X');
+        Player p2 = new Player(gameScan,'O');
 
 
         while (true) {
             // Player number one (x)
-            System.out.println(p1.name + " Choose between (1-9) in the game-board");
-            String choosenum = gameScan.nextLine();
-            if (playGround.isValidPosition(choosenum)){
-                playGround.WritePositionToBoard( choosenum, p1);
-                
+            p1.placeMarker(gameScan, gameBoard);
+            gameBoard.print();
+            if(gameBoard.hasWon(p1)){
+                System.out.println("Congratulations " + p1.name + ", you have won!");
+                System.out.println("Would you like to play again? (yes/no)");
+                String wantToContinue = gameScan.nextLine();
+                if(wantToContinue.equals("no")){
+                    break;
+                }
+                else {
+                    System.out.println("The game will now reset.");
+                    gameBoard.resetBoard();
+                }
             }
-            System.out.println(playGround.hasWon(p1));
-            playGround.print();
-            if(!playGround.canGameContinue()){
-                break;
+            if(!gameBoard.canGameContinue()){
+                System.out.println("The game is unsettled, the game will now reset!");
+                gameBoard.resetBoard();
             }
 
             //Player number two (o)
-            System.out.println(p2.name + " Choose between (1-9) in the game-board");
-            String choosenum1 = gameScan.nextLine();
-            System.out.println( "is valid" + playGround.isValidPosition(choosenum1));
-            if (playGround.isValidPosition(choosenum1)){
-                playGround.WritePositionToBoard( choosenum1, p2);
+            p2.placeMarker(gameScan,gameBoard);
+            gameBoard.print();
+            if(gameBoard.hasWon(p2)){
+                System.out.println("Congratulations " + p2.name + ", you have won!");
+                System.out.println("Would you like to play again? (yes/no)");
+                String wantToContinue = gameScan.nextLine();
+                if(wantToContinue.equals("no")){
+                    break;
+                }
+                else {
+                    System.out.println("The game will now reset.");
+                    gameBoard.resetBoard();
+                }
             }
-
-            System.out.println( playGround.hasWon ( p2));
-            playGround.print();
-            if(!playGround.canGameContinue()){
-                break;
+            if(!gameBoard.canGameContinue()){
+                System.out.println("The game is unsettled, the game will now reset!");
+                gameBoard.resetBoard();
             }
-
-
         }
-
-
+        System.out.println("Funny to play with you, you're welcome back!");
     }
-
-
 }
 
 
