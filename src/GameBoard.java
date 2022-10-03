@@ -13,12 +13,14 @@ public class GameBoard {
         //        0         2         4
 
     }
+    //This method handles printing the board to the console - unit.
     public void print () {
         // this for-each loop goes through all the rows in the gameboard
         for (char[] row : board) {
             //this for-each loop goes through every position in the row
             for (char position : row) {
                 System.out.print(position);
+                //Adding an empty space to make the board look larger.
                 System.out.print(' ');
             }
             System.out.println();
@@ -26,8 +28,8 @@ public class GameBoard {
 
         }
     }
+    // This method allows us to quickly write a position 1 - 9 on the board.
     public void WritePositionToBoard(String position, Player player) {
-        // I build this switch so that the player can choose a position.
         // The responsibility of this method is to write a symbol to a position on the board
         switch (position) {
             case "1":
@@ -59,7 +61,11 @@ public class GameBoard {
                 break;
 
         }
-    }    public boolean isValidPosition(String position){
+    }
+    // This method returns true/false depending on if the position is valid.
+    // It checks if the position 1-9 is empty then it will return true but if you for example chose 13 for some reason
+    // then it will return false.
+    public boolean isValidPosition(String position){
         switch (position){
             case "1":
                 if (board [0][0] ==' ')
@@ -101,7 +107,9 @@ public class GameBoard {
 
         }
         return false;
-    }   private boolean diagonal(String player) {
+    }
+    // method that checks if someone has won in diagonal way.
+    private boolean diagonal(String player) {
         String firstRow = charsToString(board[0][0], board[2][2], board[4][4]);
         String secondRow = charsToString(board[0][4], board[2][2], board[4][0]);
         if (firstRow.equals(player)) {
@@ -128,7 +136,7 @@ public class GameBoard {
         return false;
 
     }
-
+    // method that checks if someone has won in vertical way.
     private boolean vertical(String player) {
         String firstRow = charsToString(board[0][0], board[2][0], board[4][0]);
         String secondRow = charsToString(board[0][2], board[2][2], board[4][2]);
@@ -144,12 +152,12 @@ public class GameBoard {
     }
 
 
-    // this method converts three seperate chars to a string.
+    // this method converts three separate chars to a string.
     private String charsToString(char a, char b, char c) {
         char[] array = new char[]{a, b, c};
         return String.valueOf(array);
     }
-    //method that is checking if a player won.
+    //method that is checking if a player won by looking if they have 3 symbols in vertical/diagonal/horisontal way.
     public boolean hasWon (Player player) {
         String playerRow = charsToString(player.symbol, player.symbol, player.symbol);
         if (diagonal(playerRow) || horizontal(playerRow) || vertical(playerRow)) {
@@ -157,6 +165,8 @@ public class GameBoard {
         }
         return false;
     }
+    // method that return true/false depending on if the game can continue, the game can continue if there are any empty
+    // spots on the gameboard.
     public boolean canGameContinue (){
         int counter = 0;
         for(int i = 0; i < board.length; i += 2 ){
@@ -165,8 +175,6 @@ public class GameBoard {
                 char symbol = row [k];
                 if(symbol != ' '){
                     counter ++;
-
-
                 }
             }
 
@@ -179,11 +187,12 @@ public class GameBoard {
         }
 
     }
+    // This method is used for resetting the game-board to scratch, so the player can play again.
     public void resetBoard(){
         for(int i = 0; i < board.length; i += 2 ){
             char[] row = board[i];
             for(int k = 0 ; k < row.length; k += 2){
-               row[k] = ' ';
+               row[k] = ' '; // The game - board is reset when all the spots are empty.
             }
 
         }

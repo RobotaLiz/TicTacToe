@@ -25,8 +25,11 @@ public class Main {
                 else {
                     System.out.println("The game will now reset.");
                     gameBoard.resetBoard();
+                    gameBoard.print();
                 }
             }
+            // If the game-board cant continue then the game is reset.
+            // we have already checked if the player has won, so here we only need to check if the board is full
             if(!gameBoard.canGameContinue()){
                 System.out.println("The game is unsettled, the game will now reset!");
                 gameBoard.resetBoard();
@@ -45,12 +48,17 @@ public class Main {
                 else {
                     System.out.println("The game will now reset.");
                     gameBoard.resetBoard();
+                    gameBoard.print();
                 }
             }
+            // If the game-board cant continue then the game is reset.
+            // we have already checked if the player has won, so here we only need to check if the board is full
             if(!gameBoard.canGameContinue()){
                 System.out.println("The game is unsettled, the game will now reset!");
                 gameBoard.resetBoard();
             }
+            //end of loop
+            // if player x has won or the game is unsettled, then the game will continue with player o as the first player.
         }
         System.out.println("Funny to play with you, you're welcome back!");
     }
